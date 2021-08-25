@@ -1,9 +1,9 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.scss';
+//import logo from './logo.svg';
+import './App.css';
 import Restaurants from "./pages/Restaurants/Restaurants";
 import Feed from './pages/Feed/Feed';
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
