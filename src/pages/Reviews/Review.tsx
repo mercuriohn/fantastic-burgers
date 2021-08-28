@@ -9,15 +9,18 @@ import { raitingCalulationHelper, IRaitingAverage } from './raitingCalulationHel
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import PostCard from '../../components/PostCard/PostCard';
+import ReviewForm from '../../components/ReviewForm/ReviewForm';
+import useReviewForm from '../../components/ReviewForm/useReviewForm';
 import "./Review.css";
 
 
+
 export default function Review() {
-  const [reviews, setReviews] = useState<IReview[]>();
+  const [reviews, setReviews] = useState<IReview[]>([]);
   const [restaurant, setRestaurant] = useState<IRestaurant>();
   const [raiting, setRaiting] = useState<IRaitingAverage>();
-
   const { id } = useParams<{ id: string }>();
+  const reviewFormProp = useReviewForm({ restaurant });
 
   useEffect(() => {
     const fetch = async () => {
@@ -32,7 +35,8 @@ export default function Review() {
 
 
       const reviews = (await getAllReviews()).map((item) => item.data)
-        .filter((review) => review.restaurant.id === Number(id));
+        .filter((review) => review.restaurant.id === Number(id))
+        .sort((a, b) => b.timestamp - a.timestamp);
 
       setReviews(reviews);
       setRaiting(raitingCalulationHelper({ reviews }).raitingScore);
@@ -41,12 +45,23 @@ export default function Review() {
     fetch();
   }, [])
 
+  //optimistic update
+  useEffect(() => {
+    if (reviewFormProp.createdReview) {
+      const optimisticReview = [...reviews, ...[reviewFormProp.createdReview]]
+        .sort((a, b) => b.timestamp - a.timestamp);
+      setReviews(optimisticReview);
+    }
+
+  }, [reviewFormProp.createdReview])
+
+
 
 
   return (
     <Layout defaultPageTitle={`Review ${restaurant?.name} for Fantastic Burger community`}>
       <div className="restaurant-raiting">
-        <h2>We love your oppinion ... 🍔  </h2>
+        <h2>We love your oppinion ... 🤥  </h2>
       </div>
       <div>
         <h3>{`${restaurant?.name} has ${reviews?.length} reviews`} </h3>
@@ -58,11 +73,13 @@ export default function Review() {
       </div>
       <Container>
         <Row>
+          <ReviewForm {...reviewFormProp} />
+        </Row>
+        <Row>
           {
             reviews?.map((review) => (
-              <div>
+              <div key={review.id}>
                 <PostCard
-                  key={review.id}
                   title={`reviewed by ${review.user.name}`}
                   description={review.description}
                   image="https://picsum.photos/200/300/?blur"
