@@ -1,5 +1,17 @@
-.green-background {
-  background-color: aqua;
+.menu {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
+
+.menu-container {
+  width: 50%;
+  box-sizing: border-box;
+  padding: 30px;
+}
+ 
+.white-background {
+  background-color: white;
 }
 
 .red-background {

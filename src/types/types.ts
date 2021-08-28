@@ -1,3 +1,8 @@
+
+export enum EImageTerms {
+  DISGUSTING_HAMBURGER = "disgusting hamburger",
+  HAMBURGER = "hamburger"
+}
 export interface IGetAllReviewsResult {
   data: IReview
 }

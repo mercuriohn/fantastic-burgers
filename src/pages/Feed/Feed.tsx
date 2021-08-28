@@ -3,67 +3,46 @@ import { Link } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Collapse from 'react-bootstrap/Collapse';
 import "./Feed.css";
-import { getAllReviews, createReview } from './../../api/reviewsAPI/reviewsAPI';
+import ImageLoader from './../../components/ImageLoader/ImageLoader';
+import useImageLoader from './../../components/ImageLoader/useImageLoader';
 import Button from 'react-bootstrap/Button';
+import Layout from "../../components/Layout/Layout";
+import { useState } from "react";
+
+
 
 
 
 export default function Feed() {
 
-  async function addReview() {
-    const review = {
-      id: 2,
-      description: "awesome",
-      ratings: {
-        "texture": 2,
-        "taste": 2,
-        "presentation": 2
-      },
-      user: {
-        "id": 1,
-        "name": "oscar"
-      },
-      restaurant: {
-        "id": 1,
-        "name": "Burger Concept"
-      },
-      date: "2021-02-02",
-      timestamp: 1629996868
-    }
+  const [showCreatePost, setImageUpload] = useState(false);
 
-    const r = await createReview(review);
-
-    console.log("created r", r);
-
-
+  function handleCollapse(toggle: boolean) {
+    setImageUpload(toggle);
   }
 
-  useEffect(() => {
-    getAllReviews().then((response) => {
-      console.log(response);
-    })
-
-  }, []);
+  const imagesLoaderProps = useImageLoader({ onShowImageLoader: handleCollapse });
 
   return (
-    <>
-      <h1>FEED PAGE</h1>
-      <Link to="/restaurants">Go To Restaurants</Link>
-      <Button onClick={addReview}>Add Review </Button>
-
-      <Container>
-        <Row>
-          <Col xs={12} md={6} className="green-background">1 of 2</Col>
-          <Col xs={12} md={6} className="red-background">2 of 2</Col>
-        </Row>
-        <Row>
-          <Col>1 of 3 {process.env.REACT_APP_NOT_SECRET_CODE}</Col>
-          <Col>2 of 3</Col>
-          <Col>3 of 3</Col>
-        </Row>
-      </Container>
-
-    </>
+    <Layout defaultPageTitle="Fantastic Burger">
+      <div className="menu">
+        <div className="menu-container white-background">
+          <Button
+            variant="outline-dark"
+            disabled={showCreatePost}
+            size="lg"
+            onClick={() => handleCollapse(true)}>
+            Share your burger
+          </Button>
+        </div>
+      </div>
+      <Collapse in={showCreatePost}>
+        <div>
+          <ImageLoader {...imagesLoaderProps} />
+        </div>
+      </Collapse>
+    </Layout >
   )
 } 
