@@ -3,8 +3,12 @@
   justify-content: space-between;
   align-items: center;
   margin:0 auto;
-  margin-top: 50px;
+  margin-top: 0px;
   width: 200px;
+}
+
+.mb-30 {
+  margin-bottom: 30px;
 }
 
 .form {
@@ -12,18 +16,32 @@
   margin:40px auto;
 }
 
-.card-image {
-  margin-bottom: 20px;
+.image-controller-card-image {
+  margin-bottom: 30px;
   border: none;
+  display: none;
 }
 
 .image-res {
   width: 100%;
-  height: 200px;
+  height: 120px;
+}
+
+.pick-image-text {
+  display: none;
 }
 
 @media (min-width: 600px) {
   .form {
-    width: 500px !important;
+    width: 700px !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .image-controller-card-image {
+    display: block;
+  }
+  .pick-image-text {
+    display: block;
   }
 }

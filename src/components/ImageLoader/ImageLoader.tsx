@@ -13,6 +13,7 @@ export interface IImageLoaderProps {
   onSelect: (id: string) => void;
   onCancel: () => void;
   value: IValue;
+  loading: boolean;
   imageController: IImagaController[];
 }
 
@@ -25,26 +26,50 @@ export interface IImagaController {
 
 export interface IValue {
   description: string;
+  imageFile?: any;
 }
 
-export default function ImageLoader({ onChange, onSubmit, imageController, onSelect, value, onCancel }: IImageLoaderProps) {
+export default function ImageLoader({
+  onChange,
+  onSubmit,
+  imageController,
+  onSelect,
+  value,
+  onCancel,
+  loading }: IImageLoaderProps) {
 
   function handleChange({ target }: React.ChangeEvent<HTMLInputElement>) {
+
     onChange({
       ...value,
-      [target.name]: target.value
+      [target.name]:
+        target &&
+          target.files
+          ? target.files[0] : target.value
     });
   }
 
   return (
-    <Container>
+    <Form className="form">
+      <Container>
       <Row>
-        <Col><h3>Soon you will be able to upload your own picture, but for now pick one from here</h3></Col>
+          <Col className="mb-30">
+            <Form.Label className="mb-30"><h2><b>Upload your hamburger</b></h2></Form.Label>
+            <Form.Control type="file" name="imageFile" onChange={handleChange} />
+          </Col>
+        </Row>
+        <Row>
+          <Col className="mb-30">
+            <Form.Control name="description" value={value.description} onChange={handleChange} placeholder="Write something" />
+          </Col>
+        </Row>
+        <Row>
+          <Col className="pick-image-text"><h4>You can also select one picture from thease restaurant ; )</h4></Col>
       </Row>
       <Row lg={4} md={3} sm={1} xs={1}>
         {imageController.map((image) => {
           return (
-            <Col className="card-image" key={image.id}>
+            <Col className="image-controller-card-image" key={image.id}>
               <Card
                 border={image.selected ? "primary" : undefined}
                 bg={image.selected ? "primary" : undefined}
@@ -64,19 +89,21 @@ export default function ImageLoader({ onChange, onSubmit, imageController, onSel
           )
         })}
       </Row>
-      <Row>
-        <Form className="form">
-          <Row>
-            <Col>
-              <Form.Control name="description" value={value.description} onChange={handleChange} placeholder="Write something" />
-            </Col>
-          </Row>
-          <div className="buttons">
-            <Button variant="primary" onClick={onSubmit}>Publish</Button>
-            <Button variant="secondary" onClick={onCancel}>Cancel</Button>
+      </Container>
+      <div className="buttons">
+        <Button
+          variant="primary"
+          disabled={loading}
+          onClick={onSubmit}>
+          {loading ? 'Loading...' : 'Publish'}
+        </Button>
+        <Button
+          variant="secondary"
+          disabled={loading}
+          onClick={onCancel}>
+          Cancel
+        </Button>
           </div>
-        </Form>
-      </Row>
-    </Container>
+    </Form>
   )
 }

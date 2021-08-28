@@ -3,6 +3,7 @@ import React from 'react';
 import './App.css';
 import Restaurants from "./pages/Restaurants/Restaurants";
 import Feed from './pages/Feed/Feed';
+import Search from './pages/Search/Search';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -25,9 +26,11 @@ function App() {
             Learn React
           </a>
         </header> */}
+
         <Switch>
           <Route path="/" exact component={Feed} />
-          <Route path="/restaurants" component={Restaurants} />
+          <Route path="/restaurant/:id" component={Restaurants} />
+          <Route path="/search/:zipcode" component={Search} />
         </Switch>
       </div>
     </Router>
