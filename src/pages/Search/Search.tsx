@@ -29,6 +29,8 @@ export default function Search() {
     fetchRestaurants();
   }, [])
 
+
+
   return (
     <Layout defaultPageTitle="Fantastic Burger">
       <Container>
