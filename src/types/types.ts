@@ -18,6 +18,18 @@ export interface IPost {
   }
 }
 
+export enum ERaiting {
+  TERRIBLE = "terrible",
+  POOR = "poor",
+  AVERAGE = "average",
+  VERY_GOOD = "very good",
+  EXCELLENT = "excellent"
+}
+
+export type TRating = {
+  [values in ERaiting]: number
+}
+
 export interface IGetAllPostResult {
   data: IPost
 }

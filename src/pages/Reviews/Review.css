@@ -1,0 +1,9 @@
+.review-restaurant-container {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+}
+
+.restaurant-raiting {
+  margin: 20px 0;
+}
