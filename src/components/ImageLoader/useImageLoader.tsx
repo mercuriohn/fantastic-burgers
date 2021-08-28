@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { IImageLoaderProps, IValue, IImagaController } from "./ImageLoader";
-import { getHamburgerImages } from "./../../api/imageAPI/imageAPI";
+import { getHamburgerImages, createPostWithImage } from "./../../api/imageAPI/imageAPI";
+import { IPost } from "./../../types/types";
 
 
 
@@ -12,10 +13,13 @@ interface images {
   id: string;
   url: string;
 }
-export type useImageLoaderResult = IImageLoaderProps;
+export interface useImageLoaderResult extends IImageLoaderProps {
+  createdImage?: IPost
+}
 
 export default function useImageLoader({ onShowImageLoader }: IUserImageLoaderParameters): useImageLoaderResult {
   const [value, setValue] = useState<IValue>({ description: "" });
+  const [createdImage, setCreatedImage] = useState<IPost>();
   const [imageController, setImageControler] = useState<IImagaController[]>([]);
 
   useEffect(() => {
@@ -73,12 +77,33 @@ export default function useImageLoader({ onShowImageLoader }: IUserImageLoaderPa
     setValue({ description: "" })
   }
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     if (!isValid()) return;
-    console.log("This is the image", value, imageController);
+
+    const imageSelected = imageController.find((image) => image.selected);
+
+    if (!imageSelected) return;
+
+    const newPost: IPost = {
+      id: imageSelected.id,
+      imgUrl: imageSelected.imgUrl,
+      description: value.description,
+      timestamp: new Date().getTime(),
+      creator: {
+        id: 1,
+        name: "user 1"
+      }
+    }
+
+    await createPostWithImage(newPost);
+
+    setCreatedImage(newPost);
+
     //clear the values 
     setValue({ description: "" })
+
     clearImageSelection();
+
     //hide the component 
     onShowImageLoader(false);
   }
@@ -89,7 +114,8 @@ export default function useImageLoader({ onShowImageLoader }: IUserImageLoaderPa
     onSubmit,
     onCancel,
     onSelect,
-    onChange
+    onChange,
+    createdImage
   }
 
 }

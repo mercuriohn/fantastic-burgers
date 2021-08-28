@@ -7,6 +7,21 @@ export interface IGetAllReviewsResult {
   data: IReview
 }
 
+export interface IPost {
+  id: string;
+  imgUrl: string;
+  description: string;
+  timestamp: number;
+  creator: {
+    id: number;
+    name: string;
+  }
+}
+
+export interface IGetAllPostResult {
+  data: IPost
+}
+
 export interface IReview {
   id: number;
   description: string;

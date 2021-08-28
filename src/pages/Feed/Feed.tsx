@@ -10,8 +10,8 @@ import useImageLoader from './../../components/ImageLoader/useImageLoader';
 import Button from 'react-bootstrap/Button';
 import Layout from "../../components/Layout/Layout";
 import { useState } from "react";
-
-
+import usePostList from "../../components/PostList/usePostList";
+import PostList from "../../components/PostList/PostList";
 
 
 
@@ -24,6 +24,8 @@ export default function Feed() {
   }
 
   const imagesLoaderProps = useImageLoader({ onShowImageLoader: handleCollapse });
+
+  const postListProps = usePostList(imagesLoaderProps.createdImage);
 
   return (
     <Layout defaultPageTitle="Fantastic Burger">
@@ -43,6 +45,7 @@ export default function Feed() {
           <ImageLoader {...imagesLoaderProps} />
         </div>
       </Collapse>
+      <PostList {...postListProps} />
     </Layout >
   )
 } 
