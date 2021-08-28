@@ -22,6 +22,19 @@ export interface IGetAllPostResult {
   data: IPost
 }
 
+export interface IGetAllRestaurants {
+  data: IRestaurant
+}
+
+export interface IRestaurant {
+  id: number;
+  city: string,
+  country: string,
+  street: string,
+  name: string,
+  zipCode: string
+}
+
 export interface IReview {
   id: number;
   description: string;

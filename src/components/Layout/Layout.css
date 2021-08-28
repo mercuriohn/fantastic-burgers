@@ -7,6 +7,12 @@
   
 }
 
+.search {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
+
 .header .h1 {
   margin-top: 43px;
   font-size: 18px;

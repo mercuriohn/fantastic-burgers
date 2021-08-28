@@ -1,8 +1,4 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import React from "react";
 import Collapse from 'react-bootstrap/Collapse';
 import "./Feed.css";
 import ImageLoader from './../../components/ImageLoader/ImageLoader';
