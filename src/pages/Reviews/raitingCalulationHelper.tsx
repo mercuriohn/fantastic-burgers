@@ -115,9 +115,9 @@ export function raitingCalulationHelper({ reviews }: IraitingCalulationHelperPar
   }
 
   const raitingScore = {
-    texture: calculateScore(textureAverage),
-    taste: calculateScore(tasteAverage),
-    presentation: calculateScore(presentationAverage)
+    texture: Math.round(calculateScore(textureAverage)),
+    taste: Math.round(calculateScore(tasteAverage)),
+    presentation: Math.round(calculateScore(presentationAverage))
   }
 
   return {

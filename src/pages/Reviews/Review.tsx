@@ -63,14 +63,14 @@ export default function Review() {
       <div className="restaurant-raiting">
         <h2>We love your oppinion ... 🤥  </h2>
       </div>
-      <div>
+      {reviews.length > 0 ? <div>
         <h3>{`${restaurant?.name} has ${reviews?.length} reviews`} </h3>
         <div className="review-restaurant-container">
           <div>{`Texture: ${raiting?.texture} ⭐️`}</div>
           <div>{`Taste: ${raiting?.taste} ⭐️`}</div>
           <div>{`Presentation: ${raiting?.presentation} ⭐️`}</div>
         </div>
-      </div>
+      </div> : "Write your first review"}
       <Container>
         <Row>
           <ReviewForm {...reviewFormProp} />
