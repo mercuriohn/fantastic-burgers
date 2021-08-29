@@ -67,7 +67,7 @@ export default function Review() {
         <h3>{`${restaurant?.name} has ${reviews?.length} reviews`} </h3>
         <div className="review-restaurant-container">
           <div>{`Texture: ${raiting?.texture} ⭐️`}</div>
-          <div>{`Taste: ${raiting?.texture} ⭐️`}</div>
+          <div>{`Taste: ${raiting?.taste} ⭐️`}</div>
           <div>{`Presentation: ${raiting?.presentation} ⭐️`}</div>
         </div>
       </div>

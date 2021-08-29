@@ -101,8 +101,16 @@ export function raitingCalulationHelper({ reviews }: IraitingCalulationHelperPar
 
 
   const calculateScore = (average: TRating) => {
-    //AR = 1*a+2*b+3*c+4*d+5*e/5 Formuala
-    const averageRating = 1 * average.terrible + 2 * average.poor + 3 * average.average + 4 * average['very good'] + 5 * average.excellent / 5;
+
+    const averageRating = (1 * average.terrible +
+      2 * average.poor + 3 * average.average +
+      4 * average['very good'] +
+      5 * average.excellent) / (average.terrible
+        + average.poor
+        + average.average
+        + average['very good']
+        + average.excellent);
+
     return averageRating;
   }
 
