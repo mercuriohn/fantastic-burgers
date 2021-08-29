@@ -36,7 +36,7 @@ export default function Search() {
       <Container>
         <Row className="header">
           <h1>
-            {restaurants.length ? `Thease are the restaurants with burgers close to ${zipcode}` :
+            {restaurants.length ? `These are the restaurants with burgers close to ${zipcode}` :
               `Seems like you need to open a restaurant with burgers, no places were found`}
           </h1>
         </Row>

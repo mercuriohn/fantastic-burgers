@@ -61,7 +61,7 @@ export default function Review() {
   return (
     <Layout defaultPageTitle={`Review ${restaurant?.name} for Fantastic Burger community`}>
       <div className="restaurant-raiting">
-        <h2>We love your oppinion ... 🤥  </h2>
+        <h2>We love your opinion ... 🧡  </h2>
       </div>
       {reviews.length > 0 ? <div>
         <h3>{`${restaurant?.name} has ${reviews?.length} reviews`} </h3>
