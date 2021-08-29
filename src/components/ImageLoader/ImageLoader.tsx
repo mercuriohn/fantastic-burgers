@@ -64,7 +64,7 @@ export default function ImageLoader({
           </Col>
         </Row>
         <Row>
-          <Col className="pick-image-text"><h4>You can also select one picture from thease restaurant ; )</h4></Col>
+          <Col className="pick-image-text"><h4>You don't have a picture, it's ok, pick one from below ; )</h4></Col>
       </Row>
       <Row lg={4} md={3} sm={1} xs={1}>
         {imageController.map((image) => {
